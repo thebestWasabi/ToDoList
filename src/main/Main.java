@@ -1,6 +1,5 @@
 package main;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -10,36 +9,23 @@ public class Main {
     }
 
     public static void start() {
-        Scanner scanner = new Scanner(System.in);
 
-        int capacity = 10;
-        int size = 0;
-        String[] toDoList = new String[capacity];
+        Scanner scanner = new Scanner(System.in);
+        DynamicArray toDoList = new DynamicArray();
         int choose = 3;
 
         do {
-            System.out.println("1. Add item\n2. Show all\n3. Exit");
+            System.out.println("Выбери пункт 1, 2 или 3:\n1. Add new item\n2. Show all item\n3. Exit");
             choose = scanner.nextInt();
 
             if (choose == 1) {
                 System.out.println("Enter new toDo");
                 scanner.nextLine();
-
-                while (size >= capacity) {
-                    toDoList = growArray(toDoList);
-                    capacity = toDoList.length;
-                }
-
-                toDoList[size++] = scanner.nextLine();
-
+                toDoList.add(scanner.nextLine());
             } else if (choose == 2) {
-                System.out.println(Arrays.toString(toDoList));
+                System.out.println(toDoList);
             }
         }
         while (choose != 3);
-    }
-
-    public static String[] growArray(String[] originalArray) {
-        return Arrays.copyOf(originalArray, originalArray.length * 2);
     }
 }
